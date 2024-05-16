@@ -31,4 +31,12 @@ export class FuncionariosService {
     });
   }
 
+  async findAll() {
+    return this.prisma.funcionario.findMany();
+  }
+
+  async findOne(id: number) {
+    return this.prisma.funcionario.findUnique({where: {id}});
+  }
+
 }
