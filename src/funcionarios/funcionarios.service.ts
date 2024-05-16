@@ -1,6 +1,7 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFuncionarioDto } from './dto/create-funcionario.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UpdateFuncionarioDto } from './dto/update-funcionario.dto';
 
 @Injectable()
 export class FuncionariosService {
@@ -39,4 +40,34 @@ export class FuncionariosService {
     return this.prisma.funcionario.findUnique({where: {id}});
   }
 
+  async update(id: number, updateFuncionarioDto: UpdateFuncionarioDto) {
+    const { nomeCompleto, cpf, email, senha, salario, empresaId } = updateFuncionarioDto;
+
+    const funcionario = await this.prisma.funcionario.findUnique({ where: { id } });
+    if (!funcionario) {
+      throw new NotFoundException('Funcionário não encontrado');
+    }
+
+    return this.prisma.funcionario.update({
+      where: { id },
+      data: {
+        nomeCompleto,
+        cpf,
+        email,
+        senha: funcionario.senha, // Atualiza senha se fornecida
+        salario: parseFloat(salario), // Converte salario para number
+        empresaId,
+      },
+    });
+  }
+
+  async remove(id: number) {
+    const funcionario = await this.prisma.funcionario.findUnique({ where: { id } });
+    if (!funcionario) {
+      throw new NotFoundException('Funcionário não encontrado');
+    }
+    return this.prisma.funcionario.delete({ where: { id } });
+  }
+
 }
+
