@@ -40,7 +40,17 @@ model Emprestimo {
   id            Int         @id @default(autoincrement())
   valor         Float
   parcelas      Int
-  status        String
+  status        Boolean
   funcionarioId Int
   Funcionario   Funcionario @relation(fields: [funcionarioId], references: [id])
+   parcelasDetalhes Parcela[]
 }
+
+model Parcela {
+  id             Int         @id @default(autoincrement())
+  valorParcela   Float
+  dataVencimento DateTime
+  emprestimoId   Int
+  Emprestimo     Emprestimo  @relation(fields: [emprestimoId], references: [id])
+}
+
