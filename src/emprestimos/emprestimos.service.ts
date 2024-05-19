@@ -1,10 +1,11 @@
 
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateEmprestimoDto } from './dto/create-emprestimo.dto';
 import { UpdateEmprestimoDto } from './dto/update-emprestimo.dto';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
+import { PrismaService } from 'src/prisma/prisma.service';
+
 
 @Injectable()
 export class EmprestimosService {
