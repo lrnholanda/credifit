@@ -5,11 +5,19 @@ import { PrismaModule } from './prisma/prisma.module';
 import { EmpresasModule } from './empresas/empresas.module';
 import { FuncionariosModule } from './funcionarios/funcionarios.module';
 import { EmprestimosModule } from './emprestimos/emprestimos.module';
+import { APP_FILTER } from '@nestjs/core';
+
 
 
 @Module({
-  imports: [PrismaModule, EmpresasModule, FuncionariosModule, EmprestimosModule],
+  imports: [
+    PrismaModule, 
+    EmpresasModule,
+    FuncionariosModule, 
+    EmprestimosModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
+  
 })
 export class AppModule {}

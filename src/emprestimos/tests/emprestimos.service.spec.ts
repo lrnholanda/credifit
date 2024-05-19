@@ -49,9 +49,9 @@ describe('EmprestimosService', () => {
       email: 'serena@example.com',
       senha: 'password123',
       salario: 2400,
-      empresaId: 1,
+      empresaId: 2,
       Empresa: {
-        id: 1,
+        id: 2,
         nome: 'Credifit',
       },
     };
