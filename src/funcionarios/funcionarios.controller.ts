@@ -1,18 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
 import { FuncionariosService } from './funcionarios.service';
 import { CreateFuncionarioDto } from './dto/create-funcionario.dto';
 import { UpdateFuncionarioDto } from './dto/update-funcionario.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
 
 @Controller('funcionarios')
 export class FuncionariosController {
   constructor(private readonly funcionariosService: FuncionariosService) {}
 
   @Post()
-  create(@Body() createFuncionarioDto: CreateFuncionarioDto) {
-    return this.funcionariosService.create(createFuncionarioDto);
+  async create(@Body() createFuncionarioDto: CreateFuncionarioDto) {
+    const funcionario = await this.funcionariosService.create(createFuncionarioDto);
+    return { message: 'Funcionário criado com sucesso', funcionario };
   }
-
   @Get()
   findAll() {
     return this.funcionariosService.findAll();

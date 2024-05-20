@@ -21,6 +21,6 @@ export class CreateFuncionarioDto {
     salario: string;
 
     @IsNumber()
-    @IsOptional() // Optional if empresaId can be null
-    empresaId: number
+    @IsNotEmpty()
+    empresaId: number;
 }
